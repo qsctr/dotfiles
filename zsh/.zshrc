@@ -104,16 +104,21 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /etc/profile.d/apps-bin-path.sh
+if [[ $(hostname) != lnxsrv* ]]
+then
 
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+    source /etc/profile.d/apps-bin-path.sh
 
-fpath=(~/.zsh/completions $fpath) 
-autoload -U compinit && compinit
+    export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
-# stack autocompletion
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-eval "$(stack --bash-completion-script stack)"
+    fpath=(~/.zsh/completions $fpath) 
+    autoload -U compinit && compinit
+
+    # stack autocompletion
+    autoload -U +X compinit && compinit
+    autoload -U +X bashcompinit && bashcompinit
+    eval "$(stack --bash-completion-script stack)"
+
+fi
 
 export PATH=$PATH:~/bin
