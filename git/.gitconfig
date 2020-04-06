@@ -2,7 +2,7 @@
 	name = Bretton
 	email = qsctr@users.noreply.github.com
 [credential]
-	helper = git-credential-libsecret
+	helper = libsecret
 [core]
 	editor = code --wait
 [hub]
