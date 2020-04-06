@@ -76,6 +76,8 @@ plugins=(git)
 
 DEFAULT_USER=$USER
 
+POWERLEVEL9K_CONTEXT_TEMPLATE="%m"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
