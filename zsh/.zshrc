@@ -106,6 +106,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+SAVEHIST=1000000
+
 if [[ $(hostname) != lnxsrv* ]]
 then
 
