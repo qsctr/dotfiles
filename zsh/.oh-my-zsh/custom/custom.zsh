@@ -21,4 +21,6 @@ alias download-website="wget -m -np -p -k -K -E -w 20 --random-wait"
 # https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature
 alias temp="paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/'"
 
-alias ucla-vpn="secret-tool lookup account ucla | sudo openconnect -u bretton ssl.vpn.ucla.edu"
+ucla-vpn () {
+    secret-tool lookup account ucla | sudo openconnect -u bretton ssl.vpn.ucla.edu
+}
