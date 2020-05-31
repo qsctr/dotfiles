@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if zsh --version &> /dev/null
+then
+	export SHELL=~/bin/zsh
+	exec ssh-agent ~/bin/zsh -l
+fi

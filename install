@@ -5,3 +5,8 @@ git submodule update --init --recursive
 stow git
 stow ssh
 stow zsh
+
+if [[ $(hostname) = lnxsrv* ]]
+then
+    stow lnxsrv
+fi
