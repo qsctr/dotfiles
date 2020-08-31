@@ -141,4 +141,4 @@ fi
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/.local/bin
