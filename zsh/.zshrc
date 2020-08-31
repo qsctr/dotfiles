@@ -120,9 +120,14 @@ SAVEHIST=1000000
 if [[ $(hostname) != lnxsrv* ]]
 then
 
-    source /etc/profile.d/apps-bin-path.sh
+    if [[ ! ($(< /proc/version) =~ 'microsoft') ]]
+    then
 
-    export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+        source /etc/profile.d/apps-bin-path.sh
+
+        export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+    fi
 
     fpath=(~/.zsh/completions $fpath) 
     autoload -U compinit && compinit
