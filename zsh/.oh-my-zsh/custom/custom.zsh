@@ -8,7 +8,7 @@ alias scheme="rlwrap scheme"
 alias music="tizonia --soundcloud-user-likes -s"
 
 # https://unix.stackexchange.com/questions/202891/how-to-know-whether-wayland-or-x11-is-being-used
-alias display-type="loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type"
+alias display-type='loginctl show-session $(loginctl | grep $(whoami) | awk '\''{print $1}'\'') -p Type'
 
 alias alu="apt list --upgradable"
 
