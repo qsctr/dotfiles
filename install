@@ -1,5 +1,48 @@
 #!/bin/bash
 
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o errtrace
+shopt -s inherit_errexit
+
+echo "Updating apt packages"
+sudo apt update && sudo apt upgrade
+
+if [[ $(lsb_release -is) = 'Pop' ]]
+then
+
+    echo "Pop!_OS detected"
+
+    echo "Setting device name"
+    read -rp "Device name: " device_name
+    hostnamectl set-hostname "$device_name"
+
+    echo "Setting gnome settings"
+    gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/pop/benjamin-voros-250200.jpg'
+    gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+    gsettings set org.gnome.desktop.peripherals.touchpad speed 0.27
+    gsettings set org.gnome.desktop.peripherals.mouse speed -0.13
+    gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+    gsettings set org.gnome.desktop.session idle-delay $((60*60))
+
+    echo "Installing Fira Code"
+    sudo apt install fonts-firacode
+
+    echo "Installing VS Code"
+    vscode_deb_file="$HOME/Downloads/vscode.deb"
+    wget -O "$vscode_deb_file" 'https://update.code.visualstudio.com/latest/linux-deb-x64/stable'
+    sudo apt install "$vscode_deb_file"
+
+    echo "Installing Vivaldi"
+    wget -qO- 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | sudo apt-key add -
+    sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+    sudo apt update && sudo apt install vivaldi-stable
+
+fi
+
 git submodule update --init --recursive
 
 stow git
