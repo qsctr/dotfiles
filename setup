@@ -1,0 +1,133 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o errtrace
+shopt -s inherit_errexit
+
+echo 'Updating apt packages'
+sudo apt update && sudo apt upgrade
+
+echo 'Creating ~/bin'
+mkdir "$HOME/bin"
+
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+
+if [[ $(lsb_release -is) = 'Pop' ]]
+then
+
+    echo 'Pop!_OS detected'
+
+    echo 'Setting device name'
+    read -rp 'Device name: ' device_name
+    hostnamectl set-hostname "$device_name"
+
+    echo 'Setting gnome settings'
+    gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/pop/benjamin-voros-250200.jpg'
+    gsettings set org.gnome.desktop.wm.keybindings switch-applications "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "[]"
+    gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab', '<Super>Tab']"
+    gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
+    gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+    gsettings set org.gnome.desktop.peripherals.touchpad speed 0.27
+    gsettings set org.gnome.desktop.peripherals.mouse speed -0.13
+    gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+    gsettings set org.gnome.desktop.session idle-delay $((60*60))
+
+    echo 'Creating directories'
+    mkdir "$HOME/Documents/github"
+
+    echo 'Installing Fira Code'
+    sudo apt install fonts-firacode
+
+    echo 'Installing VS Code'
+    vscode_deb_file="$HOME/Downloads/vscode.deb"
+    wget -O "$vscode_deb_file" 'https://update.code.visualstudio.com/latest/linux-deb-x64/stable'
+    sudo apt install "$vscode_deb_file"
+
+    echo 'Installing Vivaldi'
+    wget -qO- 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | sudo apt-key add -
+    sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+    sudo apt update && sudo apt install vivaldi-stable
+
+    echo 'Setting up git-credential-libsecret'
+    sudo apt install build-essential libglib2.0-dev libsecret-1-0 libsecret-1-dev
+    git_credential_libsecret_dir='/usr/share/doc/git/contrib/credential/libsecret'
+    sudo make -C "$git_credential_libsecret_dir"
+    ln -s "$git_credential_libsecret_dir/git-credential-libsecret" "$HOME/bin/git-credential-libsecret"
+
+    echo 'Installing vpn tools'
+    sudo apt install openconnect ocproxy libsecret-tools
+
+    echo 'Enter UCLA password'
+    secret-tool store --label='UCLA' account ucla
+
+    echo 'Installing ucla-vpn-proxy'
+    cd "$HOME/Documents/github"
+    git clone 'https://github.com/qsctr/ssh-ucla-vpn'
+    ln -s ssh-ucla-vpn/ucla-vpn-proxy "$HOME/bin/ucla-vpn-proxy"
+
+    echo 'Installing snap'
+    sudo apt install snapd
+
+    echo 'Installing tizonia'
+    sudo snap install tizonia
+
+    echo 'Installing caprine'
+    sudo snap install caprine
+
+    echo 'Installing slack'
+    sudo snap install slack --classic
+
+fi
+
+echo 'Setting up Python'
+sudo apt install python3-pip python3-venv
+python3 -m pip install pipx
+pipx install pylint
+pipx install mypy
+
+echo 'Installing node'
+nvm_profile="$HOME/.nvm_profile"
+touch "$nvm_profile"
+wget -qO- 'https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh' | PROFILE="$nvm_profile" bash
+source "$nvm_profile"
+nvm install node
+
+echo 'Installing npm tools'
+npm install -g typescript
+npm install -g http-server
+
+echo 'Installing stack'
+wget -qO- 'https://get.haskellstack.org/' | sh
+
+echo 'Installing Haskell tools'
+stack install stylish-haskell
+
+echo 'Installing utils'
+sudo apt install hub rlwrap units neofetch scc graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full pwntools
+
+echo 'Installing libraries'
+sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev
+
+echo 'Installing more languages'
+sudo apt install mit-scheme spim php
+
+echo 'Installing LaTeX'
+sudo apt install texlive-full latexmk
+
+echo 'Installing stow'
+sudo apt install stow
+
+echo 'Installing dotfiles'
+cd
+git clone 'https://github.com/qsctr/dotfiles'
+cd dotfiles
+./install
+
+echo 'Installing zsh'
+sudo apt install zsh
+chsh -s "$(which zsh)"

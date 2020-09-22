@@ -73,6 +73,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 plugins=(git)
 
 # Powerlevel9k
+# TODO: switch to P10K
 
 DEFAULT_USER=$USER
 
@@ -120,22 +121,24 @@ SAVEHIST=1000000
 if [[ $(hostname) != lnxsrv* ]]
 then
 
-    if [[ ! ($(< /proc/version) =~ 'microsoft') ]]
+    if [[ $(lsb_release -is) = 'Pop' ]]
     then
 
         source /etc/profile.d/apps-bin-path.sh
 
-        export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
     fi
 
-    fpath=(~/.zsh/completions $fpath) 
+    fpath=(~/.zsh/completions $fpath)
     autoload -U compinit && compinit
 
     # stack autocompletion
     autoload -U +X compinit && compinit
     autoload -U +X bashcompinit && bashcompinit
     eval "$(stack --bash-completion-script stack)"
+
+    # nvm
+    source ~/.nvm_profile
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 fi
 
