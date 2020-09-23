@@ -45,6 +45,9 @@ then
     echo 'Creating directories'
     mkdir "$HOME/Documents/github"
 
+    echo 'Installing tweak tool'
+    sudo apt install gnome-tweaks
+
     echo 'Installing Fira Code'
     sudo apt install fonts-firacode
 
