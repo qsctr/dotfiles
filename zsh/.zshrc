@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git stack nvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,30 +112,21 @@ SAVEHIST=1000000
 if [[ $(hostname) != lnxsrv* ]]
 then
 
-    if [[ $(lsb_release -is) = 'Pop' ]]
-    then
+    # if [[ $(lsb_release -is) = 'Pop' ]]
+    # then
 
-        source /etc/profile.d/apps-bin-path.sh
+    #     source /etc/profile.d/apps-bin-path.sh
 
-    fi
-
-    fpath=(~/.zsh/completions $fpath)
-    autoload -U compinit && compinit
-
-    # stack autocompletion
-    autoload -U +X compinit && compinit
-    autoload -U +X bashcompinit && bashcompinit
-    eval "$(stack --bash-completion-script stack)"
+    # fi
 
     # nvm
-    source ~/.nvm_profile
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 fi
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 export PATH=$PATH:~/bin:~/.local/bin
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
