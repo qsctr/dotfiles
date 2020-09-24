@@ -112,12 +112,13 @@ SAVEHIST=1000000
 if [[ $(hostname) != lnxsrv* ]]
 then
 
-    # if [[ $(lsb_release -is) = 'Pop' ]]
-    # then
+    if [[ $(lsb_release -is) = 'Pop' ]]
+    then
 
-    #     source /etc/profile.d/apps-bin-path.sh
+        # https://gnunn1.github.io/tilix-web/manual/vteconfig/
+        source '/etc/profile.d/vte-2.91.sh'
 
-    # fi
+    fi
 
     # nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
