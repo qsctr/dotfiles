@@ -52,11 +52,25 @@ then
     echo 'Creating directories'
     mkdir "$HOME/Documents/github"
 
-    echo 'Installing tweak tool'
-    sudo apt install gnome-tweaks
+    echo 'Installing gnome customization tools'
+    sudo apt install gnome-tweaks gnome-shell-extensions
+    gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 
-    echo 'Installing Fira Code'
+    echo 'Installing gnome themes'
+    sudo add-apt-repository -u ppa:tista/plata-theme
+    sudo apt install plata-theme
+    gsettings set org.gnome.desktop.interface gtk-theme 'Plata-Noir'
+    gsettings set org.gnome.shell.extensions.user-theme name 'Plata-Noir'
+    sudo add-apt-repository -u ppa:snwh/ppa
+    sudo apt install paper-icon-theme
+    gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+    gsettings set org.gnome.desktop.interface cursor-theme 'Paper'
+
+    echo 'Installing fonts'
     sudo apt install fonts-firacode
+    gsettings set org.gnome.desktop.interface font-name 'Roboto 11'
+    gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 11'
+    gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Code 12'
 
     echo 'Installing VS Code'
     vscode_deb_file="$HOME/Downloads/vscode.deb"
@@ -65,8 +79,8 @@ then
 
     echo 'Installing Vivaldi'
     wget -qO- 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | sudo apt-key add -
-    sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
-    sudo apt update && sudo apt install vivaldi-stable
+    sudo add-apt-repository -u 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+    sudo apt install vivaldi-stable
 
     echo 'Setting up git-credential-libsecret'
     sudo apt install build-essential libglib2.0-dev libsecret-1-0 libsecret-1-dev
