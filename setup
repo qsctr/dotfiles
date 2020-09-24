@@ -30,14 +30,19 @@ then
 
     echo 'Setting gnome settings'
     gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+    gsettings set org.gnome.desktop.interface enable-hot-corners true
+    gsettings set org.gnome.desktop.interface show-battery-percentage true
+    gsettings set org.gnome.desktop.interface clock-show-weekday true
     gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/pop/benjamin-voros-250200.jpg'
+    gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
     gsettings set org.gnome.desktop.wm.keybindings switch-applications "[]"
     gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "[]"
     gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab', '<Super>Tab']"
     gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
     gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
     gsettings set org.gnome.desktop.peripherals.touchpad speed 0.27
-    gsettings set org.gnome.desktop.peripherals.mouse speed -0.13
+    gsettings set org.gnome.desktop.peripherals.mouse speed -0.27
+    gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'adaptive'
     gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
     gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
     gsettings set org.gnome.desktop.session idle-delay $((60*60))

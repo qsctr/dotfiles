@@ -1,0 +1,58 @@
+// Place your key bindings in this file to override the defaults
+[{
+  "key": "shift+enter",
+  "command": "cursorDown",
+  "when": "editorTextFocus"
+},{
+  "key": "shift+alt+f",
+  "command": "workbench.action.tasks.runTask",
+  "args": "Run stylish-haskell"
+},
+{
+  "key": "shift+alt+t",
+  "command": "workbench.action.tasks.runTask"
+},
+  // Terminal command tracking on Windows and Linux
+  { "key": "ctrl+up",          "command": "workbench.action.terminal.scrollToPreviousCommand", "when": "terminalFocus" },
+  { "key": "ctrl+down",        "command": "workbench.action.terminal.scrollToNextCommand", "when": "terminalFocus" },
+  { "key": "ctrl+shift+up",    "command": "workbench.action.terminal.selectToPreviousCommand", "when": "terminalFocus" },
+  {
+    "key": "ctrl+shift+down",
+    "command": "workbench.action.terminal.selectToNextCommand",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "unicode-latex.insertMathSymbol"
+  },
+  {
+    "key": "ctrl+shift+b",
+    "command": "latex-workshop.build",
+    "when": "editorLangId == 'latex'"
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+up",
+    "command": "-workbench.action.terminal.focusPreviousPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+up",
+    "command": "workbench.action.toggleMaximizedPanel",
+    "when": "panelFocus"
+  },
+  {
+    "key": "alt+down",
+    "command": "-workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+down",
+    "command": "workbench.action.toggleMaximizedPanel",
+    "when": "panelFocus"
+  }
+]
