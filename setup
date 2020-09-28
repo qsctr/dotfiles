@@ -11,8 +11,9 @@ shopt -s inherit_errexit
 echo 'Updating apt packages'
 sudo apt update && sudo apt upgrade
 
-echo 'Creating ~/bin'
+echo 'Creating directories'
 mkdir "$HOME/bin"
+mkdir "$HOME/programs"
 
 export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 
@@ -41,6 +42,7 @@ then
     gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
     gsettings set org.gnome.desktop.wm.keybindings switch-panels "[]"
     gsettings set org.gnome.shell.keybindings toggle-overview "['<Ctrl><Alt>Tab']" # MX Master 2S thumb button
+    gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip "['<Ctrl><Shift>Print', '<Shift><Super>s']"
     gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
     gsettings set org.gnome.desktop.peripherals.touchpad speed 0.27
     gsettings set org.gnome.desktop.peripherals.mouse speed -0.27
@@ -71,6 +73,9 @@ then
     gsettings set org.gnome.desktop.interface font-name 'Roboto 11'
     gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 11'
     gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Code 12'
+
+    echo 'Installing Tilix'
+    sudo apt install tilix
 
     echo 'Installing VS Code'
     vscode_deb_file="$HOME/Downloads/vscode.deb"
@@ -135,15 +140,20 @@ echo 'Installing Haskell tools'
 stack install stylish-haskell
 
 echo 'Installing utils'
-sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full
+sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx
 sudo snap install scc
 python3 -m pip install pwntools
 
+echo 'Installing r2'
+cd "$HOME/programs"
+git clone 'https://github.com/radareorg/radare2'
+radare2/sys/install.sh
+
 echo 'Installing libraries'
-sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev
+sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev libgo13 libgo16
 
 echo 'Installing more languages'
-sudo apt install mit-scheme spim php
+sudo apt install mit-scheme spim php golang
 
 echo 'Installing LaTeX'
 sudo apt install texlive-full latexmk
