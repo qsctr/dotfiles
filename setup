@@ -102,7 +102,7 @@ then
     echo 'Installing ucla-vpn-proxy'
     cd "$HOME/Documents/github"
     git clone 'https://github.com/qsctr/ssh-ucla-vpn'
-    ln -s ssh-ucla-vpn/ucla-vpn-proxy "$HOME/bin/ucla-vpn-proxy"
+    ln -s "$HOME/Documents/github/ssh-ucla-vpn/ucla-vpn-proxy" "$HOME/bin/ucla-vpn-proxy"
 
     echo 'Installing tizonia'
     sudo snap install tizonia
