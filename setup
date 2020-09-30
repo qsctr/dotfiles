@@ -113,6 +113,9 @@ then
     echo 'Installing slack'
     sudo snap install slack --classic
 
+    echo 'Installing zulip'
+    sudo snap install zulip
+
 fi
 
 echo 'Setting up Python'
