@@ -76,6 +76,7 @@ then
 
     echo 'Installing Tilix'
     sudo apt install tilix
+    gsettings set org.gnome.desktop.default-applications.terminal exec tilix
 
     echo 'Installing VS Code'
     vscode_deb_file="$HOME/Downloads/vscode.deb"
