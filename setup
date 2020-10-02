@@ -8,167 +8,194 @@ set -o pipefail
 set -o errtrace
 shopt -s inherit_errexit
 
-echo 'Updating apt packages'
-sudo apt update && sudo apt upgrade
+if [[ $(lsb_release -is) = 'Pop' ]]
+then
+    platform='pop'
+elif [[ $(< /proc/version) =~ 'microsoft' ]]
+then
+    platform='wsl'
+elif [[ $(hostname) = lnxsrv* ]]
+then
+    platform='lnxsrv'
+fi
 
 echo 'Creating directories'
 mkdir "$HOME/bin"
 mkdir "$HOME/programs"
+if [[ $platform != 'wsl' ]]
+then
+    mkdir "$HOME/Documents/github"
+fi
 
 export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 
-echo 'Installing snap'
-sudo apt install snapd
-
-if [[ $(lsb_release -is) = 'Pop' ]]
+if [[ $platform = 'lnxsrv' ]]
 then
 
-    echo 'Pop!_OS detected'
+    cd "$HOME/programs"
+    wget -O 'stow.tar.gz' 'https://ftp.gnu.org/gnu/stow/stow-latest.tar.gz'
+    tar xvzf 'stow.tar.gz'
+    cd stow-*
+    ./configure --prefix="$HOME"
+    make
+    make install
 
-    echo 'Setting device name'
-    read -rp 'Device name: ' device_name
-    hostnamectl set-hostname "$device_name"
+else
 
-    echo 'Setting gnome settings'
-    gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
-    gsettings set org.gnome.desktop.interface enable-hot-corners true
-    gsettings set org.gnome.desktop.interface show-battery-percentage true
-    gsettings set org.gnome.desktop.interface clock-show-weekday true
-    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/pop/benjamin-voros-250200.jpg'
-    gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
-    gsettings set org.gnome.desktop.wm.keybindings switch-applications "[]"
-    gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "[]"
-    gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab', '<Super>Tab']"
-    gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
-    gsettings set org.gnome.desktop.wm.keybindings switch-panels "[]"
-    gsettings set org.gnome.shell.keybindings toggle-overview "['<Ctrl><Alt>Tab']" # MX Master 2S thumb button
-    gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip "['<Ctrl><Shift>Print', '<Shift><Super>s']"
-    gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
-    gsettings set org.gnome.desktop.peripherals.touchpad speed 0.27
-    gsettings set org.gnome.desktop.peripherals.mouse speed -0.27
-    gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'adaptive'
-    gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-    gsettings set org.gnome.desktop.session idle-delay $((60*60))
+    echo 'Updating apt packages'
+    sudo apt update && sudo apt upgrade
 
-    echo 'Creating directories'
-    mkdir "$HOME/Documents/github"
+    echo 'Installing snap'
+    sudo apt install snapd
 
-    echo 'Installing gnome customization tools'
-    sudo apt install gnome-tweaks gnome-shell-extensions
-    gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
+    if [[ $platform = 'pop' ]]
+    then
 
-    echo 'Installing gnome themes'
-    sudo add-apt-repository -u ppa:tista/plata-theme
-    sudo apt install plata-theme
-    gsettings set org.gnome.desktop.interface gtk-theme 'Plata-Noir'
-    gsettings set org.gnome.shell.extensions.user-theme name 'Plata-Noir'
-    sudo add-apt-repository -u ppa:snwh/ppa
-    sudo apt install paper-icon-theme
-    gsettings set org.gnome.desktop.interface icon-theme 'Paper'
-    gsettings set org.gnome.desktop.interface cursor-theme 'Paper'
+        echo 'Pop!_OS detected'
 
-    echo 'Installing fonts'
-    sudo apt install fonts-firacode
-    gsettings set org.gnome.desktop.interface font-name 'Roboto 11'
-    gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 11'
-    gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Code 12'
+        echo 'Setting device name'
+        read -rp 'Device name: ' device_name
+        hostnamectl set-hostname "$device_name"
 
-    echo 'Installing Tilix'
-    sudo apt install tilix
-    gsettings set org.gnome.desktop.default-applications.terminal exec tilix
+        echo 'Setting gnome settings'
+        gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+        gsettings set org.gnome.desktop.interface enable-hot-corners true
+        gsettings set org.gnome.desktop.interface show-battery-percentage true
+        gsettings set org.gnome.desktop.interface clock-show-weekday true
+        gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/pop/benjamin-voros-250200.jpg'
+        gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+        gsettings set org.gnome.desktop.wm.keybindings switch-applications "[]"
+        gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "[]"
+        gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab', '<Super>Tab']"
+        gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
+        gsettings set org.gnome.desktop.wm.keybindings switch-panels "[]"
+        gsettings set org.gnome.shell.keybindings toggle-overview "['<Ctrl><Alt>Tab']" # MX Master 2S thumb button
+        gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip "['<Ctrl><Shift>Print', '<Shift><Super>s']"
+        gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+        gsettings set org.gnome.desktop.peripherals.touchpad speed 0.27
+        gsettings set org.gnome.desktop.peripherals.mouse speed -0.27
+        gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'adaptive'
+        gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
+        gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+        gsettings set org.gnome.desktop.session idle-delay $((60*60))
 
-    echo 'Installing VS Code'
-    vscode_deb_file="$HOME/Downloads/vscode.deb"
-    wget -O "$vscode_deb_file" 'https://update.code.visualstudio.com/latest/linux-deb-x64/stable'
-    sudo apt install "$vscode_deb_file"
+        echo 'Installing gnome customization tools'
+        sudo apt install gnome-tweaks gnome-shell-extensions
+        gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 
-    echo 'Installing Zoom'
-    zoom_deb_file="$HOME/Downloads/zoom.deb"
-    wget -O "$zoom_deb_file" 'https://ucla.zoom.us/client/latest/zoom_amd64.deb'
-    sudo apt install "$zoom_deb_file"
+        echo 'Installing gnome themes'
+        sudo add-apt-repository -u ppa:tista/plata-theme
+        sudo apt install plata-theme
+        gsettings set org.gnome.desktop.interface gtk-theme 'Plata-Noir'
+        gsettings set org.gnome.shell.extensions.user-theme name 'Plata-Noir'
+        sudo add-apt-repository -u ppa:snwh/ppa
+        sudo apt install paper-icon-theme
+        gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+        gsettings set org.gnome.desktop.interface cursor-theme 'Paper'
 
-    echo 'Installing Vivaldi'
-    wget -qO- 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | sudo apt-key add -
-    sudo add-apt-repository -u 'deb https://repo.vivaldi.com/archive/deb/ stable main'
-    sudo apt install vivaldi-stable
+        echo 'Installing fonts'
+        sudo apt install fonts-firacode
+        gsettings set org.gnome.desktop.interface font-name 'Roboto 11'
+        gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 11'
+        gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Code 12'
 
-    echo 'Setting up git-credential-libsecret'
-    sudo apt install build-essential libglib2.0-dev libsecret-1-0 libsecret-1-dev
-    git_credential_libsecret_dir='/usr/share/doc/git/contrib/credential/libsecret'
-    sudo make -C "$git_credential_libsecret_dir"
-    ln -s "$git_credential_libsecret_dir/git-credential-libsecret" "$HOME/bin/git-credential-libsecret"
+        echo 'Installing Tilix'
+        sudo apt install tilix
+        gsettings set org.gnome.desktop.default-applications.terminal exec tilix
 
-    echo 'Installing vpn tools'
-    sudo apt install openconnect ocproxy libsecret-tools
+        echo 'Installing VS Code'
+        vscode_deb_file="$HOME/Downloads/vscode.deb"
+        wget -O "$vscode_deb_file" 'https://update.code.visualstudio.com/latest/linux-deb-x64/stable'
+        sudo apt install "$vscode_deb_file"
 
-    echo 'Enter UCLA password'
-    secret-tool store --label='UCLA' account ucla
+        echo 'Installing Zoom'
+        zoom_deb_file="$HOME/Downloads/zoom.deb"
+        wget -O "$zoom_deb_file" 'https://ucla.zoom.us/client/latest/zoom_amd64.deb'
+        sudo apt install "$zoom_deb_file"
 
-    echo 'Installing ucla-vpn-proxy'
-    cd "$HOME/Documents/github"
-    git clone 'https://github.com/qsctr/ssh-ucla-vpn'
-    ln -s "$HOME/Documents/github/ssh-ucla-vpn/ucla-vpn-proxy" "$HOME/bin/ucla-vpn-proxy"
+        echo 'Installing Vivaldi'
+        wget -qO- 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | sudo apt-key add -
+        sudo add-apt-repository -u 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+        sudo apt install vivaldi-stable
 
-    echo 'Installing tizonia'
-    sudo snap install tizonia
+        echo 'Setting up git-credential-libsecret'
+        sudo apt install build-essential libglib2.0-dev libsecret-1-0 libsecret-1-dev
+        git_credential_libsecret_dir='/usr/share/doc/git/contrib/credential/libsecret'
+        sudo make -C "$git_credential_libsecret_dir"
+        ln -s "$git_credential_libsecret_dir/git-credential-libsecret" "$HOME/bin/git-credential-libsecret"
 
-    echo 'Installing caprine'
-    sudo snap install caprine
+        echo 'Installing vpn tools'
+        sudo apt install openconnect ocproxy libsecret-tools
 
-    echo 'Installing slack'
-    sudo snap install slack --classic
+        echo 'Enter UCLA password'
+        secret-tool store --label='UCLA' account ucla
 
-    echo 'Installing zulip'
-    sudo snap install zulip
+        echo 'Installing ucla-vpn-proxy'
+        cd "$HOME/Documents/github"
+        git clone 'https://github.com/qsctr/ssh-ucla-vpn'
+        ln -s "$HOME/Documents/github/ssh-ucla-vpn/ucla-vpn-proxy" "$HOME/bin/ucla-vpn-proxy"
+
+        echo 'Installing tizonia'
+        sudo snap install tizonia
+
+        echo 'Installing caprine'
+        sudo snap install caprine
+
+        echo 'Installing slack'
+        sudo snap install slack --classic
+
+        echo 'Installing zulip'
+        sudo snap install zulip
+
+    fi
+
+    echo 'Setting up Python'
+    sudo apt install python3-pip python3-venv
+    python3 -m pip install pipx
+    pipx install pylint
+    pipx install mypy
+
+    echo 'Installing node'
+    nvm_profile="$HOME/.nvm_profile"
+    touch "$nvm_profile"
+    wget -qO- 'https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh' | PROFILE="$nvm_profile" bash
+    source "$nvm_profile"
+    rm "$nvm_profile"
+    nvm install node
+
+    echo 'Installing npm tools'
+    npm install -g typescript
+    npm install -g http-server
+
+    echo 'Installing stack'
+    wget -qO- 'https://get.haskellstack.org/' | sh
+
+    echo 'Installing Haskell tools'
+    stack install stylish-haskell
+
+    echo 'Installing utils'
+    sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx
+    sudo snap install scc
+    python3 -m pip install pwntools
+
+    echo 'Installing r2'
+    cd "$HOME/programs"
+    git clone 'https://github.com/radareorg/radare2'
+    radare2/sys/install.sh
+
+    echo 'Installing libraries'
+    sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev libgo13 libgo16
+
+    echo 'Installing more languages'
+    sudo apt install mit-scheme spim php golang
+
+    echo 'Installing LaTeX'
+    sudo apt install texlive-full latexmk
+
+    echo 'Installing stow'
+    sudo apt install stow
 
 fi
-
-echo 'Setting up Python'
-sudo apt install python3-pip python3-venv
-python3 -m pip install pipx
-pipx install pylint
-pipx install mypy
-
-echo 'Installing node'
-nvm_profile="$HOME/.nvm_profile"
-touch "$nvm_profile"
-wget -qO- 'https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh' | PROFILE="$nvm_profile" bash
-source "$nvm_profile"
-rm "$nvm_profile"
-nvm install node
-
-echo 'Installing npm tools'
-npm install -g typescript
-npm install -g http-server
-
-echo 'Installing stack'
-wget -qO- 'https://get.haskellstack.org/' | sh
-
-echo 'Installing Haskell tools'
-stack install stylish-haskell
-
-echo 'Installing utils'
-sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx
-sudo snap install scc
-python3 -m pip install pwntools
-
-echo 'Installing r2'
-cd "$HOME/programs"
-git clone 'https://github.com/radareorg/radare2'
-radare2/sys/install.sh
-
-echo 'Installing libraries'
-sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev libgo13 libgo16
-
-echo 'Installing more languages'
-sudo apt install mit-scheme spim php golang
-
-echo 'Installing LaTeX'
-sudo apt install texlive-full latexmk
-
-echo 'Installing stow'
-sudo apt install stow
 
 echo 'Installing oh my zsh'
 git clone 'https://github.com/ohmyzsh/ohmyzsh' "$HOME/.oh-my-zsh"
@@ -179,6 +206,23 @@ git clone 'https://github.com/qsctr/dotfiles'
 cd dotfiles
 ./install
 
-echo 'Installing zsh'
-sudo apt install zsh
-chsh -s "$(which zsh)"
+if [[ $platform = 'lnxsrv' ]]
+then
+
+    echo 'Installing zsh'
+    cd "$HOME/programs"
+    wget -O 'zsh.tar.xz' 'https://sourceforge.net/projects/zsh/files/latest/download'
+    tar xJvf 'zsh.tar.xz'
+    cd zsh-*
+    ./configure --prefix="$HOME"
+    make
+    make check
+    make install
+
+else
+
+    echo 'Installing zsh'
+    sudo apt install zsh
+    chsh -s "$(which zsh)"
+
+fi
