@@ -83,6 +83,11 @@ then
     wget -O "$vscode_deb_file" 'https://update.code.visualstudio.com/latest/linux-deb-x64/stable'
     sudo apt install "$vscode_deb_file"
 
+    echo 'Installing Zoom'
+    zoom_deb_file="$HOME/Downloads/zoom.deb"
+    wget -O "$zoom_deb_file" 'https://ucla.zoom.us/client/latest/zoom_amd64.deb'
+    sudo apt install "$zoom_deb_file"
+
     echo 'Installing Vivaldi'
     wget -qO- 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | sudo apt-key add -
     sudo add-apt-repository -u 'deb https://repo.vivaldi.com/archive/deb/ stable main'
