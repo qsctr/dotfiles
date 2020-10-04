@@ -128,6 +128,10 @@ then
     # nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+    # opam
+    # shellcheck disable=SC2015
+    test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
+
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

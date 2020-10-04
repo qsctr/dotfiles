@@ -182,6 +182,14 @@ else
     echo 'Installing Haskell tools'
     stack install stylish-haskell
 
+    echo 'Installing OCaml'
+    sudo apt install opam
+    opam init --shell=zsh --no-setup --enable-completion --enable-shell-hook
+    opam switch create 4.11.1
+    eval "$(opam env --shell=bash)"
+    opam install utop
+    opam pin add ocaml-lsp-server 'https://github.com/ocaml/ocaml-lsp.git'
+
     echo 'Installing utils'
     sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx
     sudo snap install scc
