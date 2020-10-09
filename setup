@@ -108,6 +108,9 @@ else
         gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 11'
         gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Code 12'
 
+        echo 'Installing plugins'
+        sudo apt install gstreamer1.0-libav
+
         echo 'Installing Tilix'
         sudo apt install tilix
         gsettings set org.gnome.desktop.default-applications.terminal exec tilix
