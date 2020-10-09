@@ -119,6 +119,7 @@ else
         vscode_deb_file="$HOME/Downloads/vscode.deb"
         wget -O "$vscode_deb_file" 'https://update.code.visualstudio.com/latest/linux-deb-x64/stable'
         sudo apt install "$vscode_deb_file"
+        ln -s /usr/share/hunspell/* "$HOME/.config/Code/Dictionaries"
 
         echo 'Installing Zoom'
         zoom_deb_file="$HOME/Downloads/zoom.deb"
