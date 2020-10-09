@@ -194,6 +194,12 @@ else
     opam install utop
     opam pin add ocaml-lsp-server 'https://github.com/ocaml/ocaml-lsp.git'
 
+    echo 'Installing Java'
+    curl -s "https://get.sdkman.io?rcupdate=false" | bash
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk install java 8.0.265-open
+    sdk install gradle
+
     echo 'Installing utils'
     sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx
     sudo snap install scc

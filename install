@@ -11,6 +11,16 @@ then
     stow vscode
 fi
 
+if [[ -d "$HOME/.sdkman" ]]
+then
+    sdkman_config="$HOME/.sdkman/etc/config"
+    if [[ ! -L "$sdkman_config" ]]
+    then
+        rm "$sdkman_config"
+    fi
+    stow sdkman
+fi
+
 if [[ $(hostname) = lnxsrv* ]]
 then
     stow lnxsrv
