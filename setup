@@ -197,7 +197,8 @@ else
     echo 'Installing Java'
     curl -s "https://get.sdkman.io?rcupdate=false" | bash
     source "$HOME/.sdkman/bin/sdkman-init.sh"
-    sdk install java 8.0.265-open
+    sdk install java 15.0.0.hs-adpt
+    sdk install java 8.0.265.hs-adpt
     sdk install gradle
 
     echo 'Installing utils'
