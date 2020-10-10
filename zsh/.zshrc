@@ -82,6 +82,7 @@ plugins=(
     stack
     nvm
     sdk
+    gradle
     zsh-syntax-highlighting
 )
 
