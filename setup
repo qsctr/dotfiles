@@ -180,11 +180,10 @@ else
     npm install -g typescript
     npm install -g http-server
 
-    echo 'Installing stack'
+    echo 'Installing Haskell'
     wget -qO- 'https://get.haskellstack.org/' | sh
-
-    echo 'Installing Haskell tools'
     stack install stylish-haskell
+    curl --proto '=https' --tlsv1.2 -sSf 'https://get-ghcup.haskell.org' | sh
 
     echo 'Installing OCaml'
     sudo apt install opam

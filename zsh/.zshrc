@@ -132,6 +132,9 @@ then
     # nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+    # ghcup
+    [ -f "/home/bretton/.ghcup/env" ] && source "/home/bretton/.ghcup/env" # ghcup-env
+
     # opam
     # shellcheck disable=SC2015
     test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
