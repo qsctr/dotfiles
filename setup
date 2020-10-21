@@ -111,6 +111,9 @@ else
         echo 'Installing plugins'
         sudo apt install gstreamer1.0-libav
 
+        echo 'Installing additional gnome apps'
+        sudo apt install cheese
+
         echo 'Installing Tilix'
         sudo apt install tilix
         gsettings set org.gnome.desktop.default-applications.terminal exec tilix
