@@ -154,14 +154,11 @@ else
         echo 'Installing tizonia'
         sudo snap install tizonia
 
-        echo 'Installing caprine'
+        echo 'Installing chat apps'
         sudo snap install caprine
-
-        echo 'Installing slack'
         sudo snap install slack --classic
-
-        echo 'Installing zulip'
         sudo snap install zulip
+        sudo snap install discord
 
     fi
 
