@@ -7,3 +7,5 @@
 	editor = code --wait
 [hub]
 	protocol = https
+[pull]
+	rebase = false
