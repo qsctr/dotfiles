@@ -256,3 +256,6 @@ else
     chsh -s "$(which zsh)"
 
 fi
+
+echo 'Generating ssh key'
+ssh-keygen
