@@ -112,7 +112,7 @@ else
         sudo apt install gstreamer1.0-libav
 
         echo 'Installing additional gnome apps'
-        sudo apt install cheese
+        sudo apt install cheese deja-dup
 
         echo 'Installing Tilix'
         sudo apt install tilix
