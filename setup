@@ -115,7 +115,7 @@ else
         sudo apt install cheese deja-dup
 
         echo 'Installing Tilix'
-        sudo apt install tilix
+        sudo apt install tilix python3-nautilus
         gsettings set org.gnome.desktop.default-applications.terminal exec tilix
 
         echo 'Installing VS Code'
