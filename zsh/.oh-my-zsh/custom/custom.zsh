@@ -24,3 +24,8 @@ alias temp="paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/
 ucla-vpn () {
     secret-tool lookup account ucla | sudo openconnect -u bretton ssl.vpn.ucla.edu
 }
+
+if (( $+commands[batcat] ))
+then
+    alias cat=batcat
+fi
