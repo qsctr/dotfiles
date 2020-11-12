@@ -25,7 +25,7 @@ ucla-vpn () {
     secret-tool lookup account ucla | sudo openconnect -u bretton ssl.vpn.ucla.edu
 }
 
-if (( $+commands[batcat] ))
+if (( $+commands[bat] ))
 then
-    alias cat=batcat
+    alias cat=bat
 fi

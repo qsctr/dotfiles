@@ -201,9 +201,14 @@ else
     sdk install gradle
 
     echo 'Installing utils'
-    sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx bat
+    sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx
     sudo snap install scc
     python3 -m pip install pwntools
+
+    echo 'Installing bat'
+    bat_deb_file="$HOME/Downloads/bat.deb"
+    wget -O "$bat_deb_file" 'https://github.com/sharkdp/bat/releases/download/v0.16.0/bat_0.16.0_amd64.deb'
+    sudo apt install "$bat_deb_file"
 
     echo 'Installing r2'
     cd "$HOME/programs"
