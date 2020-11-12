@@ -206,6 +206,7 @@ else
     python3 -m pip install pwntools
 
     echo 'Installing bat'
+    # Ubuntu repository version is outdated
     bat_deb_file="$HOME/Downloads/bat.deb"
     wget -O "$bat_deb_file" 'https://github.com/sharkdp/bat/releases/download/v0.16.0/bat_0.16.0_amd64.deb'
     sudo apt install "$bat_deb_file"
@@ -220,6 +221,18 @@ else
 
     echo 'Installing more languages'
     sudo apt install mit-scheme spim php golang
+
+    echo 'Installing GNU Prolog'
+    # Install from source due to bug in Ubuntu repository version
+    cd "$HOME/programs"
+    wget -O 'gprolog.tar.gz' 'http://www.gprolog.org/gprolog-1.4.5.tar.gz'
+    tar xvzf 'gprolog.tar.gz'
+    cd gprolog-1.4.5/src
+    sudo apt install gcc-9
+    ./configure CC='/usr/bin/gcc-9' # fails to compile with gcc 10
+    make
+    make check
+    sudo make install
 
     echo 'Installing LaTeX'
     sudo apt install texlive-full latexmk
