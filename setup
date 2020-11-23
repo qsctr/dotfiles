@@ -84,6 +84,13 @@ else
         gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
         gsettings set org.gnome.desktop.session idle-delay $((60*60))
 
+        # TODO: remap PgUp/PgDn
+        # if sudo dmidecode | grep 'Version: lemp9'
+        # then
+        #     echo 'Lemur Pro detected'
+        #     echo 'Remapping PgUp/PgDn keys'
+        # fi
+
         echo 'Setting up input sources'
         gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'libpinyin')]"
         gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin init-simplified-chinese false
@@ -221,6 +228,10 @@ else
 
     echo 'Installing more languages'
     sudo apt install mit-scheme spim php golang
+
+    echo 'Installing Racket'
+    sudo add-apt-repository ppa:plt/racket
+    sudo apt install racket
 
     echo 'Installing GNU Prolog'
     # Install from source due to bug in Ubuntu repository version
