@@ -232,6 +232,7 @@ else
     echo 'Installing Racket'
     sudo add-apt-repository ppa:plt/racket
     sudo apt install racket
+    raco pkg install racket-langserver
 
     echo 'Installing GNU Prolog'
     # Install from source due to bug in Ubuntu repository version

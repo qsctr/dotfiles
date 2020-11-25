@@ -54,5 +54,16 @@
     "key": "alt+down",
     "command": "workbench.action.toggleMaximizedPanel",
     "when": "panelFocus"
+  },
+  {
+    "key": "alt+\\",
+    "command": "editor.action.insertSnippet",
+    "args": { "name": "lambda" },
+    "when": "editorTextFocus && resourceLangId == 'racket'"
+  },
+  {
+    "key": "ctrl+/",
+    "command": "-editor.action.insertSnippet",
+    "when": "editorTextFocus && resourceLangId == 'racket'"
   }
 ]
