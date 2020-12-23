@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# bash <(wget -qO- https://raw.githubusercontent.com/qsctr/dotfiles/master/setup)
-
 set -o nounset
 set -o errexit
 set -o pipefail
