@@ -1,21 +1,35 @@
 // Place your key bindings in this file to override the defaults
-[{
-  "key": "shift+enter",
-  "command": "cursorDown",
-  "when": "editorTextFocus"
-},{
-  "key": "shift+alt+f",
-  "command": "workbench.action.tasks.runTask",
-  "args": "Run stylish-haskell"
-},
-{
-  "key": "shift+alt+t",
-  "command": "workbench.action.tasks.runTask"
-},
+[
+  {
+    "key": "shift+enter",
+    "command": "cursorDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Run stylish-haskell"
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "workbench.action.tasks.runTask"
+  },
   // Terminal command tracking on Windows and Linux
-  { "key": "ctrl+up",          "command": "workbench.action.terminal.scrollToPreviousCommand", "when": "terminalFocus" },
-  { "key": "ctrl+down",        "command": "workbench.action.terminal.scrollToNextCommand", "when": "terminalFocus" },
-  { "key": "ctrl+shift+up",    "command": "workbench.action.terminal.selectToPreviousCommand", "when": "terminalFocus" },
+  {
+    "key": "ctrl+up",
+    "command": "workbench.action.terminal.scrollToPreviousCommand",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "workbench.action.terminal.scrollToNextCommand",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "workbench.action.terminal.selectToPreviousCommand",
+    "when": "terminalFocus"
+  },
   {
     "key": "ctrl+shift+down",
     "command": "workbench.action.terminal.selectToNextCommand",
@@ -58,7 +72,9 @@
   {
     "key": "alt+\\",
     "command": "editor.action.insertSnippet",
-    "args": { "name": "lambda" },
+    "args": {
+      "name": "lambda"
+    },
     "when": "editorTextFocus && resourceLangId == 'racket'"
   },
   {
