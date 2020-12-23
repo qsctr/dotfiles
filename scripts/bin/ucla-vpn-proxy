@@ -1,0 +1,33 @@
+#!/bin/bash
+
+port=9052
+pidfile='/tmp/openconnect.pid'
+countfile='/tmp/ucla-vpn-proxy-count'
+
+if start-stop-daemon --start --pidfile $pidfile --background --make-pidfile --no-close --startas /bin/bash -- -c "exec openconnect -u bretton --script-tun --script 'ocproxy -D $port' ssl.vpn.ucla.edu < <(secret-tool lookup account ucla) >&2"
+then
+    echo 'No VPN active, connecting to VPN' >&2
+    echo 1 > $countfile
+else
+    echo 'VPN already active' >&2
+    read -r count < $countfile
+    echo $((count + 1)) > $countfile
+fi
+
+function cleanup {
+    read -r count < $countfile
+    if [[ $count = 1 ]]
+    then
+        echo 'No sessions left, terminating VPN connection' >&2
+        start-stop-daemon --stop --pidfile $pidfile --remove-pidfile
+        rm $countfile
+    else
+        echo 'Another session active, not terminating VPN' >&2
+        echo $((count - 1)) > $countfile
+    fi
+}
+trap cleanup EXIT
+
+until nc -X 5 -x 127.0.0.1:$port "$1" "$2"
+do sleep 0.1
+done
