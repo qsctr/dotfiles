@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o errtrace
+shopt -s inherit_errexit
+
+vscode_config_repo="$HOME/Documents/github/vscode-haskell-config"
+
+[[ -d $vscode_config_repo ]] || git clone 'https://github.com/qsctr/vscode-haskell-config' "$vscode_config_repo"
+
+ln -s "$vscode_config_repo/.vscode" .
