@@ -160,6 +160,14 @@ else
         sudo snap install zulip
         sudo snap install discord
 
+        echo 'Installing appimagelauncher'
+        sudo add-apt-repository ppa:appimagelauncher-team/stable
+        sudo apt install appimagelauncher
+        mkdir "$HOME/Applications"
+
+        echo 'Installing cutter'
+        wget -P "$HOME/Applications/" 'https://github.com/rizinorg/cutter/releases/download/v1.12.0/Cutter-v1.12.0-x64.Linux.AppImage'
+
     fi
 
     echo 'Setting up Python'
@@ -210,11 +218,6 @@ else
     bat_deb_file="$HOME/Downloads/bat.deb"
     wget -O "$bat_deb_file" 'https://github.com/sharkdp/bat/releases/download/v0.16.0/bat_0.16.0_amd64.deb'
     sudo apt install "$bat_deb_file"
-
-    echo 'Installing r2'
-    cd "$HOME/programs"
-    git clone 'https://github.com/radareorg/radare2'
-    radare2/sys/install.sh
 
     echo 'Installing libraries'
     sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev libgo13 libgo16
