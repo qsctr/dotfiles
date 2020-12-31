@@ -247,6 +247,9 @@ else
     echo 'Installing stow'
     sudo apt install stow
 
+    echo 'Installing youtube-dl'
+    sudo -H pip3 install --upgrade youtube-dl
+
 fi
 
 echo 'Installing oh my zsh'
