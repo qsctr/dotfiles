@@ -172,9 +172,8 @@ else
 
     echo 'Setting up Python'
     sudo apt install python3-pip python3-venv
-    python3 -m pip install pipx
-    pipx install pylint
-    pipx install mypy
+    pip3 install pylint
+    pip3 install mypy
 
     echo 'Installing node'
     nvm_profile="$HOME/.nvm_profile"
