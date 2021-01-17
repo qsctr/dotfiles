@@ -138,6 +138,7 @@ then
     # opam
     # shellcheck disable=SC2015
     test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
+    eval $(opam env --shell=zsh)
 
     # sdkman
     export SDKMAN_DIR="$HOME/.sdkman"
