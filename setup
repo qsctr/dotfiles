@@ -208,7 +208,7 @@ else
     sdk install gradle
 
     echo 'Installing utils'
-    sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java
+    sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc
     sudo snap install scc
     python3 -m pip install pwntools
 
