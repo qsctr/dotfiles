@@ -26,4 +26,5 @@ alias ucla-vpn="sudo openconnect -u bretton ssl.vpn.ucla.edu < <(secret-tool loo
 if (( $+commands[bat] ))
 then
     alias cat=bat
+    alias catt=/usr/bin/cat
 fi
