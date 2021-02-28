@@ -200,6 +200,9 @@ else
     opam install utop
     opam pin add ocaml-lsp-server 'https://github.com/ocaml/ocaml-lsp.git'
 
+    echo 'Installing Coq'
+    opam pin add coq 8.13.0
+
     echo 'Installing Java'
     curl -s "https://get.sdkman.io?rcupdate=false" | bash
     source "$HOME/.sdkman/bin/sdkman-init.sh"
