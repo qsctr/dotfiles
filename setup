@@ -285,6 +285,9 @@ then
 
 else
 
+    echo 'Configuring apt preferences'
+    sudo cp "$HOME/dotfiles/apt/preferences.d/code" '/etc/apt/preferences.d'
+
     echo 'Installing zsh'
     sudo apt install zsh
     chsh -s "$(which zsh)"
