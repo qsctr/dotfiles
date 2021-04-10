@@ -50,6 +50,11 @@
     "when": "terminalFocus"
   },
   {
+    "key": "ctrl+shift+escape",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+  },
+  {
     "key": "alt+up",
     "command": "-workbench.action.terminal.focusPreviousPane",
     "when": "terminalFocus"
