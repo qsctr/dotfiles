@@ -187,6 +187,9 @@ else
     npm install -g typescript
     npm install -g http-server
 
+    echo 'Installing deno'
+    curl -fsSL https://deno.land/x/install/install.sh | sh
+
     echo 'Installing Haskell'
     wget -qO- 'https://get.haskellstack.org/' | sh
     stack install stylish-haskell

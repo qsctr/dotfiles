@@ -144,6 +144,10 @@ then
     export SDKMAN_DIR="$HOME/.sdkman"
     [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+    # deno
+    export DENO_INSTALL="/home/bretton/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
+
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
