@@ -117,7 +117,7 @@ else
         sudo apt install gstreamer1.0-libav
 
         echo 'Installing additional gnome apps'
-        sudo apt install cheese deja-dup lollypop easytag
+        sudo apt install cheese deja-dup lollypop easytag shotwell
 
         echo 'Installing Tilix'
         sudo apt install tilix python3-nautilus
