@@ -222,7 +222,7 @@ else
     echo 'Installing utils'
     sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq
     sudo snap install scc
-    python3 -m pip install pwntools z3-solver
+    python3 -m pip install pwntools z3-solver dot2tex
     sudo -H pip3 install --upgrade youtube-dl
 
     echo 'Installing bat'
