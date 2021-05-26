@@ -168,6 +168,9 @@ else
         echo 'Installing cutter'
         wget -P "$HOME/Applications/" 'https://github.com/rizinorg/cutter/releases/download/v1.12.0/Cutter-v1.12.0-x64.Linux.AppImage'
 
+        echo 'Installing VLC'
+        sudo apt install vlc
+
     fi
 
     echo 'Installing documentation'
