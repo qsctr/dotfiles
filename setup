@@ -171,7 +171,7 @@ else
     fi
 
     echo 'Installing documentation'
-    sudo apt install glibc-doc
+    sudo apt install glibc-doc manpages-posix-dev
 
     echo 'Setting up Python'
     sudo apt install python3-pip python3-venv
