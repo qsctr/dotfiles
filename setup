@@ -226,6 +226,9 @@ else
     sdk install java 8.0.265.hs-adpt
     sdk install gradle
 
+    echo 'Installing clang'
+    sudo apt install clang clang-format
+
     echo 'Installing utils'
     sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq
     sudo snap install scc
