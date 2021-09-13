@@ -175,6 +175,9 @@ else
         echo 'Installing VLC'
         sudo apt install vlc
 
+        echo 'Installing wireshark'
+        sudo apt install wireshark
+
     fi
 
     echo 'Installing documentation'
