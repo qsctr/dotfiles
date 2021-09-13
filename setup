@@ -230,10 +230,16 @@ else
     sudo apt install clang clang-format
 
     echo 'Installing utils'
-    sudo apt install hub rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq
+    sudo apt install rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq
     sudo snap install scc
     python3 -m pip install pwntools z3-solver dot2tex
     sudo -H pip3 install --upgrade youtube-dl
+
+    echo 'Installing gh'
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
+    sudo apt install gh
 
     echo 'Installing bat'
     # Ubuntu repository version is outdated
