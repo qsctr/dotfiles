@@ -230,7 +230,7 @@ else
     sudo apt install clang clang-format
 
     echo 'Installing utils'
-    sudo apt install rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq
+    sudo apt install rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq gnuplot
     sudo snap install scc
     python3 -m pip install pwntools z3-solver dot2tex
     sudo -H pip3 install --upgrade youtube-dl
