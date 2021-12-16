@@ -218,6 +218,8 @@ else
 
     echo 'Installing Coq'
     opam pin add coq 8.13.0
+    opam repo add coq-released https://coq.inria.fr/opam/released
+    opam update
 
     echo 'Installing Java'
     curl -s "https://get.sdkman.io?rcupdate=false" | bash
