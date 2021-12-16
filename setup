@@ -214,7 +214,7 @@ else
     opam switch create 4.11.1
     eval "$(opam env --shell=bash)"
     opam install utop
-    opam pin add ocaml-lsp-server 'https://github.com/ocaml/ocaml-lsp.git'
+    opam install ocaml-lsp-server
 
     echo 'Installing Coq'
     opam pin add coq 8.13.0
