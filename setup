@@ -228,6 +228,9 @@ else
     sdk install java 8.0.265.hs-adpt
     sdk install gradle
 
+    echo 'Installing Rust'
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
     echo 'Installing clang'
     sudo apt install clang clang-format
 
