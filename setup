@@ -93,6 +93,9 @@ else
         gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'libpinyin')]"
         gsettings set com.github.libpinyin.ibus-libpinyin.libpinyin init-simplified-chinese false
 
+        echo 'Installing gnome session'
+        sudo apt install gnome-session
+
         echo 'Installing gnome customization tools'
         sudo apt install gnome-tweaks gnome-shell-extensions
         gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
