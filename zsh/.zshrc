@@ -155,4 +155,6 @@ fi
 
 bindkey '^H' backward-kill-word # ctrl+backspace
 
+unsetopt share_history
+
 export PATH=$PATH:~/bin:~/.local/bin
