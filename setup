@@ -263,7 +263,7 @@ else
     sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev libgo13 libgo16
 
     echo 'Installing more languages'
-    sudo apt install mit-scheme clisp spim php golang
+    sudo apt install mit-scheme clisp spim php golang r-base r-base-dev
 
     echo 'Installing Racket'
     sudo add-apt-repository ppa:plt/racket
