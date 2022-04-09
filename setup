@@ -237,6 +237,9 @@ else
     echo 'Installing clang'
     sudo apt install clang clang-format
 
+    echo 'Installing docker'
+    sudo apt install docker.io
+
     echo 'Installing utils'
     sudo apt install rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq gnuplot
     sudo snap install scc
