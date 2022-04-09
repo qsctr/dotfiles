@@ -27,3 +27,5 @@ then
     alias cat=bat
     alias catt=/usr/bin/cat
 fi
+
+alias r=radian
