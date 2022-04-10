@@ -3,6 +3,7 @@
 git submodule update --init --recursive
 
 stow git
+stow r
 stow scripts
 stow ssh
 stow zsh
