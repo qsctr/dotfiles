@@ -260,7 +260,7 @@ else
     sudo apt install "$bat_deb_file"
 
     echo 'Installing libraries'
-    sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev libgo13 libgo16 libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libcairo2-dev
+    sudo apt install libgsl0-dev liblapack-dev libatlas-base-dev libgo13 libgo16 libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libcairo2-dev libgdal-dev libgeos-dev libproj-dev
 
     echo 'Installing more languages'
     sudo apt install mit-scheme clisp spim php golang
