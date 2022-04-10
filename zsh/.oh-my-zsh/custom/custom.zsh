@@ -12,9 +12,6 @@ alias display-type='loginctl show-session $(loginctl | grep $(whoami) | awk '\''
 
 alias alu="apt list --upgradable"
 
-alias python=python3
-alias pip=pip3
-
 alias download-website="wget -m -np -p -k -K -E -w 20 --random-wait"
 
 # https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature

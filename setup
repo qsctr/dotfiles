@@ -187,7 +187,7 @@ else
     sudo apt install glibc-doc manpages-posix-dev
 
     echo 'Setting up Python'
-    sudo apt install python3-pip python3-venv
+    sudo apt install python3-pip python3-venv python-is-python3
     pip3 install pylint
     pip3 install mypy
 
