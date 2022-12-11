@@ -104,10 +104,9 @@ else
         gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 
         echo 'Installing gnome themes'
-        sudo add-apt-repository -u ppa:tista/plata-theme
-        sudo apt install plata-theme
-        gsettings set org.gnome.desktop.interface gtk-theme 'Plata-Noir'
-        gsettings set org.gnome.shell.extensions.user-theme name 'Plata-Noir'
+        sudo apt install materia-gtk-theme
+        gsettings set org.gnome.desktop.interface gtk-theme 'Materia-dark'
+        gsettings set org.gnome.shell.extensions.user-theme name 'Materia-dark'
         sudo add-apt-repository -u ppa:snwh/ppa
         sudo apt install paper-icon-theme
         gsettings set org.gnome.desktop.interface icon-theme 'Paper'
