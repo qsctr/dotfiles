@@ -73,7 +73,10 @@ else
         gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
         gsettings set org.gnome.desktop.wm.keybindings switch-panels "[]"
         gsettings set org.gnome.shell.keybindings toggle-overview "['<Ctrl><Alt>Tab']" # MX Master 2S thumb button
-        gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip "['<Ctrl><Shift>Print', '<Shift><Super>s']"
+        gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Screenshot area'
+        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "sh -c 'gnome-screenshot -a --file=$HOME/Pictures/screenshot.png && wl-copy < $HOME/Pictures/screenshot.png'"
+        gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Shift><Super>s'
         gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
         gsettings set org.gnome.desktop.peripherals.touchpad speed 0.27
         gsettings set org.gnome.desktop.peripherals.mouse speed -0.27
