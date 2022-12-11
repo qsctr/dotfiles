@@ -125,6 +125,9 @@ else
         echo 'Installing additional gnome apps'
         sudo apt install cheese deja-dup gnome-clocks lollypop easytag shotwell
 
+        echo 'Installing command line tools for desktop'
+        sudo apt install wl-clipboard
+
         echo 'Installing Tilix'
         sudo apt install tilix python3-nautilus
         gsettings set org.gnome.desktop.default-applications.terminal exec tilix
