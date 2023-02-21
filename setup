@@ -245,7 +245,7 @@ else
     sudo apt install rlwrap units neofetch graphviz shellcheck binutils gdb valgrind ffmpeg p7zip-full p7zip-rar cmake bison flex upx pdftk-java pandoc jq gnuplot aptitude bat
     sudo snap install scc
     python3 -m pip install pwntools z3-solver dot2tex
-    sudo -H pip3 install --upgrade youtube-dl
+    python3 -m pip install -U yt-dlp
 
     echo 'Installing gh'
     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
