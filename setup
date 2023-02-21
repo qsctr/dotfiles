@@ -164,13 +164,9 @@ else
 
         echo 'Installing chat apps'
         sudo snap install caprine
+        sudo snap install discord
         sudo snap install slack --classic
         sudo snap install zulip
-
-        echo 'Installing Discord'
-        discord_deb_file="$HOME/Downloads/discord.deb"
-        wget -O "$discord_deb_file" 'https://discord.com/api/download?platform=linux&format=deb'
-        sudo apt install "$discord_deb_file"
 
         echo 'Installing appimagelauncher'
         sudo add-apt-repository ppa:appimagelauncher-team/stable
