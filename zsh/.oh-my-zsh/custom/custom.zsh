@@ -19,9 +19,9 @@ alias temp="paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/
 
 alias ucla-vpn="sudo openconnect -u bretton ssl.vpn.ucla.edu < <(secret-tool lookup account ucla)"
 
-if (( $+commands[bat] ))
+if (( $+commands[batcat] ))
 then
-    alias cat=bat
+    alias cat=batcat
     alias catt=/usr/bin/cat
 fi
 
