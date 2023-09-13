@@ -156,5 +156,6 @@ fi
 bindkey '^H' backward-kill-word # ctrl+backspace
 
 unsetopt share_history
+setopt inc_append_history_time
 
 export PATH=$PATH:~/bin:~/.local/bin
